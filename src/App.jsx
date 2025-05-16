@@ -1,18 +1,34 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../src/App.css";
+import {
+  showOrHideFirstName,
+  showOrHideLastName,
+} from "./features/showorhide/showOrHideSlice";
 
-import { changeTheme } from "./features/lightdarkmode/lightDarkMode";
 function App() {
-  const btnName = useSelector((store) => store.lightDarkMode.btnName);
-  const className = useSelector((store) => store.lightDarkMode.ClassName);
-  const h1Style = useSelector((store) => store.lightDarkMode.headingClassName);
-
+  const state = useSelector((store) => store.showOrHide);
+  const { showFirstName, showLastName } = state;
   const dispatch = useDispatch();
   return (
     <>
-      <div className={className}>
-        <h1 className={h1Style}>click to change Mode</h1>
-        <button onClick={() => dispatch(changeTheme())}>{btnName}</button>
+      <div>
+        <h1>Show/hide</h1>
+        <button onClick={() => dispatch(showOrHideFirstName())}>
+          show/Hide FirstName
+        </button>
+        {showFirstName ? (
+          <div>
+            <h1>jeo</h1>
+          </div>
+        ) : null}
+        <button onClick={() => dispatch(showOrHideLastName())}>
+          show/Hide LastName
+        </button>
+        {showLastName ? (
+          <div>
+            <h1>reddy</h1>
+          </div>
+        ) : null}
       </div>
     </>
   );
